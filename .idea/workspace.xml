@@ -9,14 +9,16 @@
       <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/lesson01/Gender.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/lesson01/Link.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/lesson01/Main.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/lesson01/Person.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/lesson01/Relations.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/lesson01/Research.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/org/lesson01/Tree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/lesson01/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/lesson01/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/lesson01/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

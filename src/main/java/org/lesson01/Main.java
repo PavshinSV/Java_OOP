@@ -24,6 +24,7 @@ public class Main {
         tree.addLink(dot,vi,Relations.Sister,Relations.Sister);
 
         System.out.println("-------------------\n");
-        System.out.println(tree);
+        //System.out.println(tree);
+        Research.getRelation(pa,tree);
     }
 }
