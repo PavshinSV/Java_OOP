@@ -7,6 +7,9 @@
 
 # User-specific stuff
 .idea/**/workspace.xml
+.idea/**/compiler.xml
+.idea/**/jarRepositories.xml
+target/
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
