@@ -25,13 +25,10 @@ public class Main {
 
         tree.addLink(dot, vi, Relations.SISTER, Relations.SISTER);
 
+        System.out.println(tree);
         System.out.println("-------------------\n");
-        //System.out.println(tree);
         Research.getRelation(pa, tree);
 
         System.out.println();
-
-        tree.getLinks().sort(new SortAge());
-
     }
 }
