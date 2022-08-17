@@ -2,15 +2,40 @@ package Lesson04.ClassWork;
 
 public class Program {
     public static void main(String[] args) {
-        ListAr<Integer> list = new ListAr<>(1);
+        ListAr<String> list = new ListAr<>(1);
         System.out.println(list);
-        list.add(1);
+        list.add("a");
         System.out.println(list);
-        list.add(2);
+        list.add("b");
         System.out.println(list);
-        list.add(3);
+        list.add("c");
         System.out.println(list);
-        list.add(4);
+        list.add("d");
         System.out.println(list);
+        list.add("e");
+        System.out.println(list);
+        list.add("f");
+        System.out.println(list);
+        System.out.println(list.getByIndex(2));
+        list.removeByIndex(2);
+        System.out.println(list);
+        list.removeByElement("e");
+        System.out.println(list);
+        list.set(1, "z");
+        System.out.println(list);
+        System.out.println(list.indexOf("c"));
+        ListAr<String> b = new ListAr<>();
+        b.add("u");
+        b.add("v");
+        b.add("e");
+        b.add("d");
+        System.out.println(b);
+        list.addAll(b);
+        System.out.println(list);
+        list.sort();
+        System.out.println(list);
+        list.removeAll(b);
+        System.out.println(list);
+
     }
 }
