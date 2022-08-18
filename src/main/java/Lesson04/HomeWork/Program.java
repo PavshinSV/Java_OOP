@@ -36,5 +36,8 @@ public class Program {
 
         System.out.println(taskList);
 
+        ExportToXML exp = new ExportToXML();
+        exp.exportFile();
+
     }
 }
