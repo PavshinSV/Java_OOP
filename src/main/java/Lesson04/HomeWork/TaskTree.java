@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskTree {
-    private List<Task> list = new ArrayList<>();
+    public static List<Task> list = new ArrayList<>();
 
     public List<Task> getList() {
         return list;

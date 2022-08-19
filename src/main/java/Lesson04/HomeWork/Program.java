@@ -1,5 +1,7 @@
 package Lesson04.HomeWork;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -36,8 +38,10 @@ public class Program {
 
         System.out.println(taskList);
 
-        ExportToXML exp = new ExportToXML();
-        exp.exportFile();
-
+        Path path = Path.of("/src/main/java/Lesson04/HomeWork/");
+        String fName = "TaskList";
+        String ext = ".xml";
+        File file = new File(path + fName + ext);
+        System.out.println(file);
     }
 }
