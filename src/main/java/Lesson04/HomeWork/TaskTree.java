@@ -4,18 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskTree {
-    public static List<Task> list = new ArrayList<>();
+    private final static List<Task> list = new ArrayList<>();
 
-    public List<Task> getList() {
+    public static List<Task> getList() {
         return list;
     }
 
-    public void add(Task task) {
+    public static void add(Task task) {
         list.add(task);
-        sort();
+        update();
     }
 
-    public void removeById(int id) {
+    public static void addAll(List<Task> tasks) {
+        list.addAll(tasks);
+    }
+
+    public static Task getTaskByPriority(int priority) {
+        return list.get(priority);
+    }
+
+    public static Integer getTaskById(int id) {
         int i = 0;
         boolean notFind = true;
         while (notFind && i < list.size()) {
@@ -25,14 +33,23 @@ public class TaskTree {
                 i++;
             }
         }
-        list.remove(i);
+        if (notFind) {
+            i = -1;
+        }
+        return i;
     }
 
-    public void sort() {
+    public static void removeById(int id) {
+        if (getTaskById(id) > -1) {
+            int index = getTaskById(id);
+            list.remove(index);
+        }
+    }
+
+    public static void update() {
         list.sort(new DeadlineSort());
     }
 
-    @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
         for (Task element :
@@ -40,5 +57,7 @@ public class TaskTree {
             str.append(element + "\n");
         }
         return str.toString();
+
     }
+
 }

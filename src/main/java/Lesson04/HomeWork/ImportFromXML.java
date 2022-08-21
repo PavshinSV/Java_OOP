@@ -1,54 +1,88 @@
 package Lesson04.HomeWork;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class ImportFromXML {
+    public List<Task> tasks = new ArrayList<>();
 
-    public void importFile(String fName) {
-        try {
-            // Создается построитель документа
-            DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-
-            // Создается дерево DOM документа из файла
-            Document document = documentBuilder.parse(fName);
-            // Получаем корневой элемент
-
-            Node root = document.getDocumentElement();
-
-            System.out.println("List of books:");
-            System.out.println();
-            // Просматриваем все подэлементы корневого - т.е. книги
-            NodeList books = root.getChildNodes();
-            for (int i = 0; i < books.getLength(); i++) {
-                Node book = books.item(i);
-                // Если нода не текст, то это книга - заходим внутрь
-                if (book.getNodeType() != Node.TEXT_NODE) {
-                    NodeList bookProps = book.getChildNodes();
-                    for (int j = 0; j < bookProps.getLength(); j++) {
-                        Node bookProp = bookProps.item(j);
-                        // Если нода не текст, то это один из параметров книги - печатаем
-                        if (bookProp.getNodeType() != Node.TEXT_NODE) {
-                            System.out.println(bookProp.getNodeName() + ":" + bookProp.getChildNodes().item(0).getTextContent());
-                        }
-                    }
-                    System.out.println("===========>>>>");
-                }
+    public ImportFromXML(File fName) {
+        try (Scanner reader = new Scanner(new BufferedReader(new FileReader(fName)))) {
+            StringBuilder stringBuilder = new StringBuilder();
+            while (reader.hasNext()) {
+                stringBuilder.append(reader.nextLine());
             }
+            String str = stringBuilder.toString();
+            str = str.replace("\n", "");
+            int startIndex = 0;
+            while (startIndex < str.length()) {
+                int index1 = str.indexOf("<", startIndex);
+                int index2 = str.indexOf(">", index1);
+                String temp = new String();
+                if (index1 < 0) {
+                    index2 = str.length();
+                    temp = "endOfFile";
+                } else {
+                    temp = str.substring(index1, index2 + 1);
+                }
 
-        } catch (ParserConfigurationException ex) {
-            ex.printStackTrace(System.out);
-        } catch (SAXException ex) {
-            ex.printStackTrace(System.out);
-        } catch (IOException ex) {
-            ex.printStackTrace(System.out);
+                if (temp.equals("<task>")) {
+                    LocalDate createData = LocalDate.now();
+                    LocalDate deadLine = LocalDate.now();
+                    LocalTime createTime = LocalTime.now();
+                    String author = new String();
+                    String description = new String();
+                    boolean taskNotEnded = true;
+                    while (taskNotEnded) {
+                        int tagIndexStart = str.indexOf("<", index2 + 1);
+                        int tagIndexStop = str.indexOf(">", tagIndexStart);
+                        String tag = str.substring(tagIndexStart, tagIndexStop + 1);
+                        int nextTag = str.indexOf("<", tagIndexStop);
+                        String tagValue = str.substring(tagIndexStop + 1, nextTag);
+                        switch (tag) {
+                            case ("<createDate>") -> {
+                                createData = LocalDate.parse(tagValue);
+                                index2 = nextTag + tag.length();
+                            }
+                            case ("<createTime>") -> {
+                                createTime = LocalTime.parse(tagValue);
+                                index2 = nextTag + tag.length();
+                            }
+                            case ("<deadline>") -> {
+                                deadLine = LocalDate.parse(tagValue);
+                                index2 = nextTag + tag.length();
+                            }
+                            case ("<author>") -> {
+                                author = tagValue;
+                                index2 = nextTag + tag.length();
+                            }
+                            case ("<taskDescription>") -> {
+                                description = tagValue;
+                                index2 = nextTag + tag.length();
+                            }
+                            case ("</task>") -> {
+                                taskNotEnded = false;
+                                index2 = tagIndexStop;
+                            }
+                        }
+
+                    }
+
+                    tasks.add(new Task(createData, createTime, deadLine, author, description));
+                }
+                startIndex = index2;
+            }
+            TaskTree.addAll(tasks);
+
+        } catch (Exception e) {
+            System.out.println("Ups! Tasks wasn`t imported from disk");
+            System.out.println(e);
         }
     }
 }
