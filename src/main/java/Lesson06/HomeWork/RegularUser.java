@@ -1,9 +1,6 @@
 package Lesson06.HomeWork;
 
-import java.util.Scanner;
-
 public class RegularUser extends UserModel implements SendMessage {
-    MessageModel messageModel;
 
     public RegularUser(String name) {
         super(name);
@@ -15,9 +12,7 @@ public class RegularUser extends UserModel implements SendMessage {
 
     @Override
     public void sendMessage(UserModel user, String message) {
-        messageModel = new MessageModel();
-        String msgText = messageModel.getMessage(this, user, message);
-        MessageRepository.addMsg(new Message(msgText, messageModel.getMsgID()));
+        MessageRepository.addMsg(new Message(this, user, message));
     }
 
     @Override

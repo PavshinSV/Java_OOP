@@ -1,7 +1,6 @@
 package Lesson06.HomeWork;
 
 public class SuperUser extends RegularUser implements SendMessage, DeleteMessage {
-    MessageModel messageModel;
 
     public SuperUser(String name) {
         super(name);
@@ -13,9 +12,7 @@ public class SuperUser extends RegularUser implements SendMessage, DeleteMessage
 
     @Override
     public void sendMessage(UserModel user, String message) {
-        messageModel = new MessageModel();
-        String msgText = messageModel.getMessage(this, user, message);
-        MessageRepository.addMsg(new Message(msgText, messageModel.getMsgID()));
+        MessageRepository.addMsg(new Message(this, user, message));
     }
 
     @Override

@@ -27,7 +27,7 @@ public class Programm {
         MessageRepository.updateMsgList();
 
         ((SuperUser) UserRepository.getUserByID(3).get()).deleteMsg(3);
-        System.out.println(MessageRepository.getMessageById(3));
+        MessageRepository.getMessageById(3).ifPresent(System.out::println);
         MessageRepository.updateMsgList();
         System.out.println("Demo was ended. You may try to add/remove users and send messages\n");
 

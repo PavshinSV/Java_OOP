@@ -1,7 +1,6 @@
 package Lesson06.HomeWork;
 
 public class VIPUser extends SuperUser implements EditMessage {
-    MessageModel messageModel;
 
     public VIPUser(String name) {
         super(name);
@@ -13,9 +12,7 @@ public class VIPUser extends SuperUser implements EditMessage {
 
     @Override
     public void sendMessage(UserModel user, String message) {
-        messageModel = new MessageModel();
-        String msgText = messageModel.getMessage(this, user, message);
-        MessageRepository.addMsg(new Message(msgText, messageModel.getMsgID()));
+        MessageRepository.addMsg(new Message(this, user, message));
     }
 
     @Override
